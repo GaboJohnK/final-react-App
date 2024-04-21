@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import App from "./App";
+import WeatherForecast from "./WeatherForecast";
 import "./styles.css"; 
 
 const SearchWeather = () => {
@@ -81,6 +82,8 @@ const SearchWeather = () => {
           </div>
         </div>
       )}
+
+      <WeatherForecast />
       
       <p className="link">
         This project was coded by Gabo John
