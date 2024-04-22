@@ -1,15 +1,41 @@
 import React, { useState, useEffect } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
 const WeatherForecast = () => {
     const [forecastData, setForecastData] = useState([]);
 
-    useEffect(() => {
+    const parseForecastData = (data) => {
+        const parsedData = [];
+        const uniqueDates = {};
+
+        data.forEach((item) => {
+            const toDay = item.dt_txt.split(' ');
+            const date = new Date(toDay[0]);
+
+            const dayOfWeek = getDayOfWeek(date);
+
+            if (!uniqueDates[dayOfWeek]) {
+                uniqueDates[dayOfWeek] = true;
+                parsedData.push({
+                    date: dayOfWeek,
+                    minTemp: item.main.temp_min,
+                    maxTemp: item.main.temp_max,
+                    icon: item.weather[0].icon,
+                    description: item.weather[0].description
+                });
+            }
+        });
+
+        return parsedData.slice(0, 5);
+    };
+
+     useEffect(() => {
         const fetchWeatherData = async () => {
             try {
-                // Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
                 const apiKey = '9fb4b1ec478c718ebf8daf5d8d38e4b9';
-                const city = 'Gaborone'; // Replace with desired city name
+                const city = 'Gaborone';
                 const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
 
                 const response = await axios.get(apiUrl);
@@ -21,50 +47,36 @@ const WeatherForecast = () => {
         };
 
         fetchWeatherData();
-    }, []);
+    }, 
+);
 
-    const parseForecastData = (data) => {
-        // Extract and parse necessary data for the next 5 days
-        const parsedData = [];
-        const uniqueDates = {};
-
-        data.forEach((item) => {
-            const date = item.dt_txt.split(' ')[0]; // Extract date (YYYY-MM-DD)
-
-            if (!uniqueDates[date]) {
-                uniqueDates[date] = true;
-                parsedData.push({
-                    date,
-                    maxTemp: item.main.temp_min,
-                    minTemp: item.main.temp_max,
-                    icon: item.weather[0].icon,
-                    description: item.weather[0].description
-                });
-            }
-        });
-
-        return parsedData.slice(0, 5); // Return data for the next 5 days
-    };
+    const getDayOfWeek = (date) => {
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    return daysOfWeek[date.getDay()];
+};
 
     return (
         <div className="weather-forecast">
-            <h2>5-Day Weather Forecast</h2>
-            <div className="forecast-days">
+            
+            <Row>
                 {forecastData.map((dayData, index) => (
-                    <div className="forecast-day" key={index}>
-                        <div className="day-name">{new Date(dayData.date).toLocaleDateString('en-US', { weekday: 'short' })}</div>
-                        <img
-                            className="weather-icon"
-                            src={`https://openweathermap.org/img/wn/${dayData.icon}.png`}
-                            alt="Weather Icon"
-                        />
-                        <div className="temperature">
-                            <span className="max-temp">{Math.round(dayData.maxTemp)}°</span>  <span className="min-temp">{Math.round(dayData.minTemp)}°</span>
+                     <Col key={index} sm={2} className="text-center"> 
+                        <div className="forecast-day">
+                            <div className="day-name">{dayData.date}</div>
+                            <img
+                                className="weather-icon"
+                                src={`https://openweathermap.org/img/wn/${dayData.icon}.png`}
+                                alt="Weather Icon"
+                            />
+                            <div className="temperature">
+                                <span className="max-temp">{Math.round(dayData.maxTemp)}°</span>
+                                <span className="min-temp">{Math.round(dayData.minTemp)}°</span>
+                            </div>
+                            <div className="weather-description">{dayData.description}</div>
                         </div>
-                        <div className="weather-description">{dayData.description}</div>
-                    </div>
+                    </Col>
                 ))}
-            </div>
+            </Row>
         </div>
     );
 };
