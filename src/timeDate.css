@@ -1,0 +1,12 @@
+.App {
+    font-family: "Roboto Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+    margin-top: 30px;
+}
+.time{
+    font-size: 15px;
+}
+.date{
+    font-size: 15px;
+}

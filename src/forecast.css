@@ -1,0 +1,13 @@
+.weather-forecast {
+    font-family: "Roboto Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+    position: relative;
+    bottom: 50px;
+}
+.max-temp {
+    color: black;
+}
+.min-temp {
+    color: rgb(85, 4, 4);
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import "./timeDate.css";
 
 
 
@@ -16,8 +17,8 @@ function App() {
     return (
         <div className="App">
   
-            <h2 align="center"> {showTime}</h2>
-            <h2 align="center"> {showDate}</h2>
+            <h2 className="time"> {showTime}</h2>
+            <h2 className="date"> {showDate}</h2>
         </div>
     );
 }

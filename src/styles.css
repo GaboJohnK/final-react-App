@@ -2,15 +2,14 @@
 .weather-card {
   font-family: "Roboto Mono", monospace;
   font-weight: 300;
-  font-style: normal;
-  text-align: center;
+  font-style: normal; 
   background-color: #807e7d;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 900px;
+  width: 750px;
   margin: 0 auto;
-  height: 600px;
+  height: 550px;
 }
 
 h1 {
@@ -22,9 +21,9 @@ h1 {
 h2 {
   margin: 10px;
 }
-
-.App {
-  font-size: 10px;
+.defaultCity{
+  font-size: 25px;
+  margin-left: 10px;
 }
 
 ul {
@@ -57,17 +56,16 @@ ul {
 }
 
 .description {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 30px;
+  position: relative;
+  bottom: 90px;
+  left: 90px;
+  text-align: center;
 }
 
 .weather-icon {
-  width: 150px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   margin-right: 5px;
-  vertical-align: middle;
 }
 
 .weather-list-item {
@@ -76,9 +74,9 @@ ul {
 
 .clear-icon {
   position: relative;
-  right: 60px;
+  right: 75px;
   cursor: pointer;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .temp {
@@ -90,7 +88,7 @@ ul {
 }
 
 .col {
-  font-size: 25px;
+  font-size: 20px;
   color: rgb(9, 64, 64);
 }
 

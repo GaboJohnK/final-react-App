@@ -63,14 +63,15 @@ const SearchWeather = () => {
 
       {weatherData && (
         <div className="weather-info">
+          
+          <App />
+          <h1 className="defaultCity">{weatherData.name}</h1>
+          <h2 className="temp">{Math.round(weatherData.main.temp)}℃</h2>
           <img
             src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
             alt="Weather Icon"
             className="weather-icon"
           />
-          <App />
-          <h1 className="defaultCity">{weatherData.name}</h1>
-          <h2 className="temp">{Math.round(weatherData.main.temp)}℃</h2>
           <h2 className="descr">{weatherData.weather[0].description}</h2>
           <div className="description">
             <div className="col">

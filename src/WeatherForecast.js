@@ -3,6 +3,8 @@ import { Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
+import "./forecast.css";
+
 const WeatherForecast = () => {
     const [forecastData, setForecastData] = useState([]);
 
@@ -63,15 +65,16 @@ const WeatherForecast = () => {
                      <Col key={index} sm={2} className="text-center"> 
                         <div className="forecast-day">
                             <div className="day-name">{dayData.date}</div>
+                            
+                            <div className="temperature">
+                                <span className="max-temp">{Math.round(dayData.maxTemp)}°</span>{' '} 
+                                <span className="min-temp">{Math.round(dayData.minTemp)}°</span>
+                            </div>
                             <img
-                                className="weather-icon"
+                                className="weather_icon"
                                 src={`https://openweathermap.org/img/wn/${dayData.icon}.png`}
                                 alt="Weather Icon"
                             />
-                            <div className="temperature">
-                                <span className="max-temp">{Math.round(dayData.maxTemp)}°</span>
-                                <span className="min-temp">{Math.round(dayData.minTemp)}°</span>
-                            </div>
                             <div className="weather-description">{dayData.description}</div>
                         </div>
                     </Col>
